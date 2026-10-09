@@ -1,0 +1,34 @@
+[
+  {
+    "config": "vector_only",
+    "overall": {
+      "ndcg": 0.8641038557193317,
+      "recall": 0.9615384615384616,
+      "mrr": 0.8285256410256411
+    },
+    "per_tag": {
+      "aws": 1.0,
+      "pillars": 1.0,
+      "short": 0.9261859507142916,
+      "operational-excellence": 1.0,
+      "long": 0.7718216255952429,
+      "security": 1.0,
+      "reliability": 1.0,
+      "performance": 1.0,
+      "cost": 1.0,
+      "sustainability": 1.0,
+      "overview": 0.8102255193577976,
+      "k8s": 0.7563241550829394,
+      "components": 0.5356973151785931,
+      "control-plane": 0.6309297535714575,
+      "architecture": 0.8769765845238192,
+      "api": 0.8769765845238192,
+      "objects": 0.8310890392971821,
+      "names": 1.0,
+      "service": 1.0,
+      "acronym": 0.6577324383928644,
+      "pod": 1.0,
+      "typo": 0.6309297535714575
+    }
+  }
+]

@@ -1,0 +1,58 @@
+{"id": 1, "question": "What are the six pillars of the AWS Well-Architected Framework?", "expected_doc_ids": ["aws-well-architected-framework"], "tags": ["aws", "pillars", "short"]}
+{"id": 2, "question": "List and briefly describe the AWS Well-Architected pillars", "expected_doc_ids": ["aws-well-architected-framework"], "tags": ["aws", "pillars"]}
+{"id": 3, "question": "Explain the Operational Excellence pillar", "expected_doc_ids": ["aws-well-architected-framework"], "tags": ["aws", "operational-excellence"]}
+{"id": 4, "question": "What are best practices for operations in AWS?", "expected_doc_ids": ["aws-well-architected-framework"], "tags": ["aws", "operational-excellence", "long"]}
+{"id": 5, "question": "Security pillar in AWS Well-Architected", "expected_doc_ids": ["aws-well-architected-framework"], "tags": ["aws", "security", "short"]}
+{"id": 6, "question": "How does AWS define identity and access management in the security pillar?", "expected_doc_ids": ["aws-well-architected-framework"], "tags": ["aws", "security"]}
+{"id": 7, "question": "Reliability pillar best practices AWS", "expected_doc_ids": ["aws-well-architected-framework"], "tags": ["aws", "reliability"]}
+{"id": 8, "question": "What is fault tolerance in AWS Well-Architected?", "expected_doc_ids": ["aws-well-architected-framework"], "tags": ["aws", "reliability"]}
+{"id": 9, "question": "Performance Efficiency pillar explained", "expected_doc_ids": ["aws-well-architected-framework"], "tags": ["aws", "performance"]}
+{"id": 10, "question": "How to select the right resource types in AWS?", "expected_doc_ids": ["aws-well-architected-framework"], "tags": ["aws", "performance"]}
+{"id": 11, "question": "Cost Optimization pillar AWS", "expected_doc_ids": ["aws-well-architected-framework"], "tags": ["aws", "cost"]}
+{"id": 12, "question": "Best practices for managing costs in AWS", "expected_doc_ids": ["aws-well-architected-framework"], "tags": ["aws", "cost", "long"]}
+{"id": 13, "question": "Sustainability pillar in AWS Well-Architected", "expected_doc_ids": ["aws-well-architected-framework"], "tags": ["aws", "sustainability"]}
+{"id": 14, "question": "How does AWS approach environmental sustainability?", "expected_doc_ids": ["aws-well-architected-framework"], "tags": ["aws", "sustainability"]}
+{"id": 15, "question": "AWS Well-Architected review process", "expected_doc_ids": ["aws-well-architected-framework"], "tags": ["aws", "overview"]}
+
+
+{"id": 18, "question": "What is Kubernetes?", "expected_doc_ids": ["k8s-overview-kubernetes"], "tags": ["k8s", "overview", "short"]}
+{"id": 19, "question": "Kubernetes overview and key features", "expected_doc_ids": ["k8s-overview-kubernetes"], "tags": ["k8s", "overview"]}
+{"id": 20, "question": "Main components of Kubernetes", "expected_doc_ids": ["k8s-kubernetes-components-kubernetes"], "tags": ["k8s", "components"]}
+{"id": 21, "question": "Explain the Kubernetes control plane", "expected_doc_ids": ["k8s-kubernetes-components-kubernetes"], "tags": ["k8s", "components", "control-plane"]}
+{"id": 22, "question": "What are worker nodes in Kubernetes?", "expected_doc_ids": ["k8s-kubernetes-components-kubernetes"], "tags": ["k8s", "components"]}
+{"id": 23, "question": "Kubernetes architecture diagram explanation", "expected_doc_ids": ["k8s-cluster-architecture-kubernetes"], "tags": ["k8s", "architecture"]}
+{"id": 24, "question": "High-level Kubernetes cluster architecture", "expected_doc_ids": ["k8s-cluster-architecture-kubernetes"], "tags": ["k8s", "architecture", "long"]}
+{"id": 25, "question": "How does the Kubernetes API work?", "expected_doc_ids": ["k8s-the-kubernetes-api-kubernetes"], "tags": ["k8s", "api"]}
+{"id": 26, "question": "Kubernetes objects and API server", "expected_doc_ids": ["k8s-objects-in-kubernetes-kubernetes", "k8s-the-kubernetes-api-kubernetes"], "tags": ["k8s", "objects"]}
+{"id": 27, "question": "Working with Kubernetes objects", "expected_doc_ids": ["k8s-objects-in-kubernetes-kubernetes"], "tags": ["k8s", "objects"]}
+{"id": 28, "question": "Kubernetes names and namespaces", "expected_doc_ids": ["k8s-object-names-and-ids-kubernetes"], "tags": ["k8s", "names"]}
+{"id": 29, "question": "What is a Service in Kubernetes?", "expected_doc_ids": ["k8s-service-kubernetes"], "tags": ["k8s", "service", "short"]}
+{"id": 30, "question": "How does Kubernetes Service discovery work?", "expected_doc_ids": ["k8s-service-kubernetes"], "tags": ["k8s", "service"]}
+{"id": 31, "question": "k8s components", "expected_doc_ids": ["k8s-kubernetes-components-kubernetes"], "tags": ["k8s", "acronym", "short"]}
+{"id": 32, "question": "k8s overview", "expected_doc_ids": ["k8s-overview-kubernetes"], "tags": ["k8s", "acronym"]}
+
+{"id": 34, "question": "Kubernetes pod definition", "expected_doc_ids": ["k8s-pods-kubernetes"], "tags": ["k8s", "pod"]}
+{"id": 35, "question": "Explain etcd in Kubernetes", "expected_doc_ids": ["k8s-kubernetes-components-kubernetes"], "tags": ["k8s", "components"]}
+{"id": 36, "question": "Kubernetes scheduler role", "expected_doc_ids": ["k8s-kubernetes-components-kubernetes"], "tags": ["k8s", "components"]}
+{"id": 37, "question": "Cloud controller manager in k8s", "expected_doc_ids": ["k8s-kubernetes-components-kubernetes"], "tags": ["k8s", "components", "long"]}
+{"id": 38, "question": "What are Kubernetes labels and selectors?", "expected_doc_ids": ["k8s-objects-in-kubernetes-kubernetes"], "tags": ["k8s", "objects"]}
+{"id": 39, "question": "Difference between ClusterIP, NodePort, and LoadBalancer services", "expected_doc_ids": ["k8s-service-kubernetes"], "tags": ["k8s", "service", "long"]}
+{"id": 40, "question": "Kubernetes API versions", "expected_doc_ids": ["k8s-the-kubernetes-api-kubernetes"], "tags": ["k8s", "api"]}
+
+
+{"id": 43, "question": "What is a Pod in k8s?", "expected_doc_ids": ["k8s-pods-kubernetes"], "tags": ["k8s", "pod", "acronym"]}
+{"id": 44, "question": "AWS sustainability best practices", "expected_doc_ids": ["aws-well-architected-framework"], "tags": ["aws", "sustainability"]}
+{"id": 45, "question": "Kubernettes architecture", "expected_doc_ids": ["k8s-cluster-architecture-kubernetes"], "tags": ["k8s", "typo", "architecture"]}
+{"id": 46, "question": "AWS Well Architected framework pillars 2023", "expected_doc_ids": ["aws-well-architected-framework"], "tags": ["aws", "pillars"]}
+{"id": 47, "question": "Control plane vs data plane in Kubernetes", "expected_doc_ids": ["k8s-kubernetes-components-kubernetes"], "tags": ["k8s", "components", "long"]}
+{"id": 48, "question": "Kubernetes object management", "expected_doc_ids": ["k8s-objects-in-kubernetes-kubernetes"], "tags": ["k8s", "objects"]}
+{"id": 49, "question": "Service types in k8s", "expected_doc_ids": ["k8s-service-kubernetes"], "tags": ["k8s", "service", "acronym"]}
+{"id": 50, "question": "AWS reliability testing strategies", "expected_doc_ids": ["aws-well-architected-framework"], "tags": ["aws", "reliability"]}
+
+{"id": 51, "question": "What is the role of kubelet?", "expected_doc_ids": ["k8s-kubernetes-components-kubernetes"], "tags": ["k8s", "components"]}
+{"id": 52, "question": "Kubernetes API conventions", "expected_doc_ids": ["k8s-the-kubernetes-api-kubernetes"], "tags": ["k8s", "api"]}
+{"id": 53, "question": "Detecting and protecting sensitive data AWS", "expected_doc_ids": ["aws-well-architected-framework"], "tags": ["aws", "security"]}
+{"id": 54, "question": "Incident response in AWS operational excellence", "expected_doc_ids": ["aws-well-architected-framework"], "tags": ["aws", "operational-excellence"]}
+{"id": 55, "question": "Scaling resources in AWS performance efficiency", "expected_doc_ids": ["aws-well-architected-framework"], "tags": ["aws", "performance"]}
+{"id": 56, "question": "AWS cost allocation tags", "expected_doc_ids": ["aws-well-architected-framework"], "tags": ["aws", "cost"]}
+{"id": 57, "question": "Region selection for sustainability AWS", "expected_doc_ids": ["aws-well-architected-framework"], "tags": ["aws", "sustainability"]}

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>青禾报销助手</title>
+<style>
+:root{
+  --bg:#f5f6f8; --card:#fff; --bd:#e3e6ea; --tx:#1f2328; --tx2:#5c6470; --tx3:#8b949e;
+  --pri:#1f6feb; --ok:#1a7f37; --warn:#9a6700; --dan:#cf222e;
+  --okbg:#eaf6ee; --warnbg:#fff8e5; --danbg:#ffebe9; --pribg:#eef4ff;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);
+  font:14px/1.65 system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif}
+.wrap{max-width:1080px;margin:0 auto;padding:20px 18px 60px}
+
+header.top{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:14px}
+h1{font-size:19px;margin:0 0 4px;letter-spacing:.3px}
+.sub{color:var(--tx2);font-size:12.5px}
+.claim{background:var(--warnbg);border:1px solid #f0e0b0;color:#6b4e00;
+  padding:7px 12px;border-radius:6px;font-size:12.5px;margin:12px 0 16px}
+
+.who{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--bd);
+  border-radius:8px;padding:7px 11px}
+.who label{font-size:12px;color:var(--tx2)}
+select{padding:5px 8px;border:1px solid var(--bd);border-radius:6px;background:#fff;
+  font:inherit;font-size:13px;color:var(--tx);cursor:pointer}
+
+nav{display:flex;gap:3px;border-bottom:1px solid var(--bd);margin-bottom:18px;flex-wrap:wrap}
+nav button{background:none;border:none;border-bottom:2px solid transparent;padding:9px 15px;
+  font:inherit;font-size:13.5px;color:var(--tx2);cursor:pointer;margin-bottom:-1px}
+nav button.on{color:var(--pri);border-bottom-color:var(--pri);font-weight:600}
+nav button:hover{color:var(--tx)}
+.panel{display:none}
+.panel.on{display:block}
+
+.card{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:16px 18px;margin-bottom:14px}
+.qbox{display:flex;gap:9px}
+input[type=text]{flex:1;padding:10px 13px;border:1px solid var(--bd);border-radius:8px;
+  font:inherit;font-size:14px}
+input[type=text]:focus{outline:none;border-color:var(--pri);box-shadow:0 0 0 3px var(--pribg)}
+.btn{background:var(--pri);color:#fff;border:none;border-radius:8px;padding:10px 20px;
+  font:inherit;font-size:14px;cursor:pointer;white-space:nowrap}
+.btn:hover{filter:brightness(1.07)}
+.btn.gh{background:#fff;color:var(--tx);border:1px solid var(--bd)}
+.btn.sm{padding:5px 13px;font-size:12.5px}
+.btn.ok{background:var(--ok)}
+.chips{margin-top:11px;display:flex;gap:7px;flex-wrap:wrap}
+.chip{background:#fff;border:1px solid var(--bd);border-radius:20px;padding:5px 12px;
+  font-size:12.5px;color:var(--tx2);cursor:pointer}
+.chip:hover{border-color:var(--pri);color:var(--pri)}
+.chip.hot{border-color:#f0c36d;background:var(--warnbg);color:#7a5b00}
+
+.badge{display:inline-block;padding:3px 11px;border-radius:20px;font-size:12px;font-weight:600;margin-right:9px}
+.badge.answer{background:var(--okbg);color:var(--ok)}
+.badge.escalate{background:var(--warnbg);color:var(--warn)}
+.badge.refuse{background:var(--danbg);color:var(--dan)}
+.headline{font-size:15.5px;font-weight:600;margin:2px 0 10px}
+.body p{margin:0 0 7px;color:#24292f}
+
+.cite{border-left:3px solid var(--bd);padding:11px 14px;margin:11px 0;border-radius:0 8px 8px 0;background:#fbfcfd}
+.cite.primary{border-left-color:var(--ok);background:var(--okbg)}
+.cite.superseding{border-left-color:var(--pri);background:var(--pribg)}
+.cite.overlay{border-left-color:#d29922;background:var(--warnbg)}
+.cite .lb{font-weight:600;font-size:13.5px}
+.cite .mt{color:var(--tx2);font-size:12px;margin:3px 0 7px}
+.cite .src{color:var(--tx3);font-size:11.5px;word-break:break-all;margin-bottom:6px}
+.cite .qt{white-space:pre-wrap;background:#fff;border:1px solid var(--bd);border-radius:6px;
+  padding:9px 11px;font-size:13px;color:#24292f}
+.rtag{font-size:11px;padding:1.5px 7px;border-radius:4px;background:#fff;border:1px solid var(--bd);
+  color:var(--tx2);margin-left:7px;font-weight:500}
+
+.notice{border-left:3px solid #d29922;background:var(--warnbg);padding:9px 13px;margin:9px 0;
+  border-radius:0 7px 7px 0;font-size:13px;color:#5c4300}
+.notice.dis{border-left-color:var(--tx3);background:#f6f8fa;color:var(--tx2)}
+
+details.tr{margin-top:13px;border-top:1px dashed var(--bd);padding-top:10px}
+details.tr summary{cursor:pointer;font-size:12.5px;color:var(--tx2);user-select:none}
+details.tr table{margin-top:9px;font-size:12.5px;border-collapse:collapse;width:100%}
+details.tr td{padding:4px 10px 4px 0;vertical-align:top;color:var(--tx2)}
+details.tr td:first-child{color:var(--tx3);white-space:nowrap;width:150px}
+
+table.g{width:100%;border-collapse:collapse;font-size:13px}
+table.g th{text-align:left;padding:9px 11px;border-bottom:2px solid var(--bd);color:var(--tx2);
+  font-weight:600;font-size:12.5px}
+table.g td{padding:9px 11px;border-bottom:1px solid #eef0f2;vertical-align:top}
+table.g tr:hover td{background:#fafbfc}
+.mono{font-family:ui-monospace,Consolas,monospace;font-size:12px}
+.tag{display:inline-block;padding:1.5px 8px;border-radius:20px;font-size:11.5px;font-weight:600}
+.tag.g{background:var(--okbg);color:var(--ok)}
+.tag.y{background:var(--warnbg);color:var(--warn)}
+.tag.r{background:var(--danbg);color:var(--dan)}
+.tag.b{background:var(--pribg);color:var(--pri)}
+.tag.n{background:#f0f2f4;color:var(--tx2)}
+
+.tk{border:1px solid var(--bd);border-radius:9px;padding:13px 15px;margin-bottom:10px;background:#fff}
+.tk .n{font-weight:600;font-size:13.5px}
+.tk .d{color:var(--tx2);font-size:13px;margin-top:5px}
+.tk .rr{color:var(--dan);font-size:13px;margin-top:6px}
+.empty{color:var(--tx3);text-align:center;padding:34px;font-size:13.5px}
+.chain{display:flex;gap:7px;align-items:center;flex-wrap:wrap;font-size:12px;color:var(--tx3)}
+.hint{color:var(--tx3);font-size:12.5px;margin-top:9px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <div>
+    <h1>青禾报销助手</h1>
+    <div class="sub">制度检索窗口 + 本人单据状态的授权只读窗口 · 不生产规则，也不裁定事实</div>
+  </div>
+  <div class="who">
+    <label>登录身份</label>
+    <select id="user">
+      <option value="wm_zhangming">张明 · 销售部/华东</option>
+      <option value="wm_lijing">李静 · 研发部/华南</option>
+      <option value="wm_wangqiang">王强 · 销售部/华北</option>
+    </select>
+  </div>
+</header>
+
+<div class="claim">◎ 本助手内容以乔姐维护的现行制度为准，单据状态以报销系统记录为准，不构成报销承诺。</div>
+
+<nav>
+  <button class="on" data-p="ask">制度问答</button>
+  <button data-p="ticket">我的单据</button>
+  <button data-p="lib">制度库</button>
+  <button data-p="review">乔姐工作台</button>
+  <button data-p="audit">审计日志</button>
+</nav>
+
+<!-- 制度问答 -->
+<section class="panel on" id="p-ask">
+  <div class="card">
+    <div class="qbox">
+      <input type="text" id="q" placeholder="问一句…（试试「我7月12号出差的住宿标准多少？」）">
+      <button class="btn" id="go">提问</button>
+    </div>
+    <div class="chips">
+      <span class="chip" data-q="出差住宿标准多少？">出差住宿标准多少？</span>
+      <span class="chip hot" data-q="我7月12号出差的住宿标准多少？">★ 我7月12号出差的住宿标准多少？</span>
+      <span class="chip" data-q="打车能报吗？">打车能报吗？</span>
+      <span class="chip hot" data-q="我这个月请客户吃饭那笔能报多少？">★ 我这个月请客户吃饭那笔能报多少？</span>
+      <span class="chip" data-q="发票丢了还能报吗？">发票丢了还能报吗？</span>
+      <span class="chip hot" data-q="帮我查一下李静的单子到哪了">★ 帮我查一下李静的单子到哪了</span>
+      <span class="chip hot" data-q="帮我把 QH20260915-017 的金额改成 500">★ 帮我把 QH20260915-017 的金额改成 500</span>
+      <span class="chip" data-q="我上个月那笔为什么被退？">我上个月那笔为什么被退？</span>
+      <span class="chip" data-q="这笔应该快通过了吧？">这笔应该快通过了吧？</span>
+    </div>
+    <div class="hint">★ 标记的是最能体现系统边界的四个问题</div>
+  </div>
+  <div id="result"></div>
+</section>
+
+<!-- 我的单据 -->
+<section class="panel" id="p-ticket">
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div><b>我的单据状态</b>
+        <div class="hint" style="margin-top:2px">只展示报销系统记录的状态字段，不含金额、事由等敏感列</div>
+      </div>
+      <div id="tkwho" class="sub"></div>
+    </div>
+  </div>
+  <div id="tickets"></div>
+</section>
+
+<!-- 制度库 -->
+<section class="panel" id="p-lib">
+  <div class="card"><b>制度库 · 版本关系</b>
+    <div class="hint">旧版本不删除，标为已废止并保留原文，供历史时期的费用回溯
+      检索时使用；★ = 元数据未经乔姐确认，不参与自动回答</div>
+  </div>
+  <div id="lib"></div>
+</section>
+
+<!-- 乔姐工作台 -->
+<section class="panel" id="p-review">
+  <div class="card"><b>乔姐工作台 · 元数据待确认队列</b>
+    <div class="hint">助手抽取到的元数据只是候选值。是否生效由乔姐决定，助手永远不自动改制度元数据。</div>
+  </div>
+  <div id="review"></div>
+  <div class="card">
+    <button class="btn gh sm" id="reset">重置 demo 数据</button>
+    <span class="hint">重置后回到初始状态（市内交通费管理办法 v2 重新变为待确认）</span>
+  </div>
+</section>
+
+<!-- 审计 -->
+<section class="panel" id="p-audit">
+  <div class="card"><b>审计日志</b>
+    <div class="hint">谁、何时、以什么意图、查了哪张单 / 哪条制度、结果如何。
+      actor 一律取自会话身份，不是取自请求体。</div>
+    <div class="chips" style="margin-top:10px">
+      <span class="chip" data-k="">全部</span>
+      <span class="chip" data-k="denied">仅拦截记录</span>
+    </div>
+  </div>
+  <div class="card" style="padding:0;overflow:hidden"><div id="audit"></div></div>
+</section>
+
+</div>
+
+<script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const PJ=(u,o)=>fetch(u,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(o||{})});
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const uid=()=>$('#user').value;
+
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
+  $$('nav button').forEach(x=>x.classList.remove('on'));
+  $$('.panel').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); $('#p-'+b.dataset.p).classList.add('on');
+  const f={ticket:loadTickets,lib:loadLib,review:loadReview,audit:loadAudit}[b.dataset.p];
+  if(f) f();
+});
+
+// ── 提问 ────────────────────────────────────────────────
+async function ask(q){
+  $('#result').innerHTML='<div class="empty">检索中…</div>';
+  const r=await PJ('/api/ask',{q,userid:uid()}).then(x=>x.json());
+  if(!r.ok){ $('#result').innerHTML='<div class="card"><span class="tag r">错误</span> '+esc(r.error)+'</div>'; return; }
+  $('#result').innerHTML=render(r.answer);
+}
+function render(a){
+  let h='<div class="card">';
+  h+=`<div><span class="badge ${a.mode}">${a.mode_label}</span></div>`;
+  h+=`<div class="headline">${esc(a.headline)}</div><div class="body">`;
+  a.body.forEach(b=>h+=`<p>${esc(b)}</p>`); h+='</div>';
+  (a.citations||[]).forEach(c=>{
+    const roleMap={primary:'主引用',superseding:'现行版本',overlay:'叠加/并存'};
+    h+=`<div class="cite ${c.role}"><div class="lb">${esc(c.label)}<span class="rtag">${roleMap[c.role]||'引用'}</span></div>`;
+    h+=`<div class="mt">生效期：${esc(c.period)}${c.note?' · '+esc(c.note):''}</div>`;
+    h+=`<div class="src">${esc(c.source_uri)}</div><div class="qt">${esc(c.text)}</div></div>`;
+  });
+  (a.notices||[]).forEach(n=>h+=`<div class="notice${n.indexOf('本助手内容')===0?' dis':''}">${esc(n)}</div>`);
+  if(a.trace){
+    h+='<details class="tr"><summary>决策轨迹（为什么是这个结果）</summary><table>';
+    for(const [k,v] of Object.entries(a.trace)){
+      const val=Array.isArray(v)||typeof v==='object'?JSON.stringify(v):v;
+      h+=`<tr><td>${esc(k)}</td><td>${esc(val)}</td></tr>`;
+    }
+    h+='</table></details>';
+  }
+  if(a.actions&&a.actions.length) h+=`<div class="hint">可执行：${a.actions.map(esc).join(' ｜ ')}</div>`;
+  return h+'</div>';
+}
+$('#go').onclick=()=>{ const q=$('#q').value.trim(); if(q) ask(q); };
+$('#q').onkeydown=e=>{ if(e.key==='Enter') $('#go').click(); };
+$$('.chip').forEach(c=>c.onclick=()=>{
+  if(c.dataset.q){ $('#q').value=c.dataset.q; ask(c.dataset.q); }
+  else if(c.dataset.k!==undefined){ loadAudit(c.dataset.k); }
+});
+
+// ── 单据 ────────────────────────────────────────────────
+async function loadTickets(){
+  $('#tickets').innerHTML='<div class="empty">加载中…</div>';
+  const r=await fetch('/api/tickets?userid='+uid()).then(x=>x.json());
+  $('#tkwho').textContent=`${r.identity.name} · ${r.identity.dept}/${r.identity.region}`;
+  if(!r.tickets.length){ $('#tickets').innerHTML='<div class="card empty">没有查到你名下的单据</div>'; return; }
+  const stmap={returned:['r','已退回'],finance_review:['y','财务复审中'],
+               dept_approval:['b','部门审批中'],completed:['g','已完成']};
+  $('#tickets').innerHTML=r.tickets.map(t=>{
+    const s=stmap[t.status_code]||['n',t.status_label];
+    return `<div class="tk"><div><span class="n mono">${esc(t.ticket_no)}</span>
+      <span class="tag ${s[0]}">${s[1]}</span></div>
+      <div class="d">当前在【${esc(t.current_node)}】环节，自 ${esc(t.node_entered_at)} 进入，已停留 <b>${t.days_in_node}</b> 天。</div>
+      ${t.last_return_reason?`<div class="rr">退回原因记录为：${esc(t.last_return_reason)}</div>`:''}
+      <div class="hint">提交于 ${esc(t.submitted_at)} · 费用发生于 ${esc(t.occurred_on)}</div></div>`;
+  }).join('');
+}
+
+// ── 制度库 ──────────────────────────────────────────────
+async function loadLib(){
+  $('#lib').innerHTML='<div class="empty">加载中…</div>';
+  const r=await fetch('/api/policies').then(x=>x.json());
+  const byTitle={};
+  r.documents.forEach(d=>(byTitle[d.title]=byTitle[d.title]||[]).push(d));
+  let h='';
+  for(const [title,ds] of Object.entries(byTitle)){
+    h+=`<div class="card"><div style="font-weight:600;margin-bottom:9px">《${esc(title)}》</div>`;
+    ds.forEach((d,i)=>{
+      const un=!d.meta_confirmed_by;
+      const st={effective:['g','现行有效'],superseded:['n','已废止'],
+                repealed:['n','已废止'],windowed:['y','限时有效'],draft:['y','草稿']}[d.status]||['n',d.status];
+      const sc=[d.scope_dept,d.scope_region].filter(Boolean).map(x=>x.join('/')).join(' · ');
+      h+=`<div style="padding:9px 0;${i?'border-top:1px dashed #eef0f2':''}">
+        <div><span class="tag ${st[0]}">${st[1]}</span>
+        <b style="font-size:13.5px">${esc(d.version)}</b>
+        ${d.doc_kind==='EVENT'?'<span class="tag y">临时通知</span>':''}
+        ${un?'<span class="tag r">★ 元数据未确认 · 不参与回答</span>':''}</div>
+        <div class="chain" style="margin-top:5px">
+          生效期 <span class="mono">${esc(d.effective_from)} ~ ${esc(d.effective_to||'至今')}</span>
+          ${d.superseded_by?`→ 被 <span class="mono">${esc(d.superseded_by)}</span> 替代`:''}
+          ${sc?`· 适用范围 <b>${esc(sc)}</b>`:''}
+          ${d.publisher?`· ${esc(d.publisher)}`:''}</div></div>`;
+    });
+    h+='</div>';
+  }
+  $('#lib').innerHTML=h;
+}
+
+// ── 乔姐工作台 ──────────────────────────────────────────
+async function loadReview(){
+  $('#review').innerHTML='<div class="empty">加载中…</div>';
+  const r=await fetch('/api/review').then(x=>x.json());
+  if(!r.pending.length){ $('#review').innerHTML='<div class="card empty">没有待确认项 —— 乔姐已全部处理完</div>'; return; }
+  $('#review').innerHTML=r.pending.map(p=>{
+    const pr=p.proposal_obj||{};
+    return `<div class="card"><div><span class="tag y">待确认</span>
+      <b>${esc(p.doc_id||'')}</b></div>
+      <div class="d hint" style="margin:7px 0">
+        识别类型：${esc(p.kind)}　置信度：<b>${p.confidence}</b>（低于阈值，不会自动生效）</div>
+      <table class="g" style="margin:9px 0"><tr><th>字段</th><th>助手抽取到的候选值</th></tr>
+      ${Object.entries(pr).map(([k,v])=>`<tr><td class="mono">${esc(k)}</td><td>${esc(v==null?'—':v)}</td></tr>`).join('')}
+      </table>
+      <div class="hint"><b>依据</b>：${esc(p.evidence)}</div>
+      <div style="margin-top:12px;display:flex;gap:8px">
+        <button class="btn ok sm" data-id="${esc(p.id)}">确认</button>
+        <button class="btn gh sm" data-rej="${esc(p.id)}">忽略</button>
+      </div></div>`;
+  }).join('');
+  $$('#review button[data-id]').forEach(b=>b.onclick=async()=>{
+    await PJ('/api/review/confirm',{id:b.dataset.id}); loadReview();
+  });
+  $$('#review button[data-rej]').forEach(b=>b.onclick=async()=>{
+    await PJ('/api/review/reject',{id:b.dataset.rej}); loadReview();
+  });
+}
+$('#reset').onclick=async()=>{ await PJ('/api/reset',{}); loadReview(); };
+
+// ── 审计 ────────────────────────────────────────────────
+async function loadAudit(kind){
+  kind=kind||'';
+  $('#audit').innerHTML='<div class="empty">加载中…</div>';
+  const r=await fetch('/api/audit'+(kind?'?kind='+kind:'')).then(x=>x.json());
+  if(!r.logs.length){ $('#audit').innerHTML='<div class="empty">暂无记录</div>'; return; }
+  const rc={ok:['g','ok'],not_found:['n','not_found'],denied:['r','denied'],escalated:['y','escalated']};
+  $('#audit').innerHTML=`<table class="g"><tr><th>时间</th><th>操作人</th><th>通道</th>
+    <th>意图</th><th>问题 / 目标</th><th>命中</th><th>结果</th></tr>`+
+    r.logs.map(l=>{
+      const s=rc[l.result_code]||['n',l.result_code];
+      return `<tr><td class="mono">${esc((l.ts||'').slice(11,19))}</td>
+        <td>${esc(l.actor_name)}<div class="hint mono">${esc(l.actor_employee)}</div></td>
+        <td class="mono">${esc(l.channel)}</td><td class="mono">${esc(l.intent)}</td>
+        <td>${esc((l.query_text||'').slice(0,34))}
+          <div class="hint mono">${esc(l.target||'')}${l.as_of?' · as_of '+esc(l.as_of):''}</div></td>
+        <td class="hint">${esc((l.detail||'').slice(0,40))}</td>
+        <td><span class="tag ${s[0]}">${s[1]}</span></td></tr>`;
+    }).join('')+'</table>';
+}
+</script>
+</body>
+</html>
